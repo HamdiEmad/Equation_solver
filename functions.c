@@ -1,16 +1,5 @@
 #include "functions.h"
 
-double det(int k, double co[k][k]); // to calculate determinants
-void slv_1stdegpoly();              // To solve linear equation
-void slv_2nddegpoly();              // To solve quadratic equation(a*x^2 +b*x +c = 0)
-void slv_3rddegpoly();              // To solve cubic equation(a*x^3 +b*x^2 +cx +d = 0)
-
-void inputpoly(int k, float *coeff);          // To input polynomial coefficients
-void printpolsym(float coeff[], int k);       // To print polynomial in symbolic form
-void solve_lineareqns(int k);                 // To solve system of linear equations using Cramer's method
-void inputsys(int k, double coeff[k][k + 1]); // To input system coefficients
-void printsys(int k, double coeff[k][k + 1]); // To print system of equations
-
 void slv_1stdegpoly() // To solve linear equation(a*X +b = 0)
 {
     float coeff[2] = {0};
