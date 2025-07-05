@@ -7,7 +7,7 @@
 #include <conio.h>
 #include <complex.h>
 
-#define pi 3.14159
+#define pi 3.14159265359
 
 double det(int k, double co[k][k]); // to calculate determinants
 
