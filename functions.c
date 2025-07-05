@@ -1,70 +1,15 @@
-#include <complex.h>
-#include <conio.h>
-#include <math.h>
-#include <stdio.h>
-#include <stdlib.h>
-#define pi 3.14159
+#include "functions.h"
+
 double det(int k, double co[k][k]); // to calculate determinants
+void slv_1stdegpoly();              // To solve linear equation
+void slv_2nddegpoly();              // To solve quadratic equation(a*x^2 +b*x +c = 0)
+void slv_3rddegpoly();              // To solve cubic equation(a*x^3 +b*x^2 +cx +d = 0)
 
-void slv_1stdegpoly(); // To solve linear equation
-void slv_2nddegpoly(); // To solve quadratic equation(a*x^2 +b*x +c = 0)
-void slv_3rddegpoly(); // To solve cubic equation(a*x^3 +b*x^2 +cx +d = 0)
-
-void inputpoly(int k, float *coeff);
-/*-It receives the coefficients from the user and stores it in an array
- -Its parameters are the degree of the polynomial and the coefficients array*/
-
-void printpolsym(float coeff[], int k);
-/*-To print the polynomial equation in a symbolic way
--Its parameters are the degree of the polynomial and the coefficients array*/
-void solve_lineareqns(int k); // solving system of linear equations using Cramer's method
-
-void inputsys(int k, double coeff[k][k + 1]);
-/*-It receives the coefficients from the user and stores it in an array
--Its parameters are the order of the system and the coefficients array*/
-
-void printsys(int k, double coeff[k][k + 1]);
-/*-To print the system of linear equations in a symbolic way
-  -Its parameters are the order of the system and the coefficients array*/
-
-int main(void)
-{
-    while (1) // To repeat the program until a terminating statement
-    {
-        printf("Please choose the type of problem:\n");
-        printf("1- Linear equation(a*X +b = 0)\n");
-        printf("2- Quadratic equation(a*x^2 +b*x +c = 0)\n");
-        printf("3- Cubic equation(a*x^3 +b*x^2 +cx +d = 0)\n");
-        printf("4- System of n linear equations(an*X1 +bn*X2 +..... = c)\n");
-        printf("Press the corresponding number to choose the problem type\n\n");
-        char c = 0, t = 0, k;
-        t = getch();
-        switch (t)
-        {
-        case ('1'):
-            slv_1stdegpoly();
-            break;
-        case ('2'):
-            slv_2nddegpoly();
-            break;
-        case ('3'):
-            slv_3rddegpoly();
-            break;
-        case ('4'):
-            printf("Please enter the number of equations you want to solve: ");
-            scanf("%d", &k);
-            solve_lineareqns(k);
-            break;
-        }
-        printf("Press any key to exit, Y to continue\n\n ");
-        // Asks the user whether to continue or exit
-        c = getch();
-        if (c == 'Y' || c == 'y')
-            continue;
-        else
-            return 0;
-    }
-}
+void inputpoly(int k, float *coeff);          // To input polynomial coefficients
+void printpolsym(float coeff[], int k);       // To print polynomial in symbolic form
+void solve_lineareqns(int k);                 // To solve system of linear equations using Cramer's method
+void inputsys(int k, double coeff[k][k + 1]); // To input system coefficients
+void printsys(int k, double coeff[k][k + 1]); // To print system of equations
 
 void slv_1stdegpoly() // To solve linear equation(a*X +b = 0)
 {
@@ -80,6 +25,7 @@ void slv_1stdegpoly() // To solve linear equation(a*X +b = 0)
         printf("X = %.3f\n", coeff[1] == 0 ? 0 : (-coeff[1] / coeff[0]));
     }
 }
+
 void slv_2nddegpoly() // To solve quadratic equation(a*x^2 +b*x +c = 0)
 {
     float coeff[3] = {0}, dis = 0;
@@ -104,7 +50,8 @@ void slv_2nddegpoly() // To solve quadratic equation(a*x^2 +b*x +c = 0)
         }
     }
 }
-void slv_3rddegpoly() // To solve qubic equation(a*x^3 +b*x^2 +cx +d = 0)
+
+void slv_3rddegpoly() // To solve cubic equation(a*x^3 +b*x^2 +cx +d = 0)
 {
     float coeff[4] = {0}, dis = 0;
     double complex w, x1, x2, x3, C, C1, p, q, delta, l, u;
@@ -148,7 +95,6 @@ void slv_3rddegpoly() // To solve qubic equation(a*x^3 +b*x^2 +cx +d = 0)
             printpolsym(coeff, 3);
             printf("X1 = %.3lf\tX2 = %.3lf\tX3 = %.3lf\n", creal(x1), creal(x2), creal(x3));
         }
-
         else
         {
             x1 = (-coeff[1] / (3 * coeff[0])) - (1 / (3 * coeff[0])) * C - (1 / (3 * coeff[0])) * C1;
@@ -161,11 +107,9 @@ void slv_3rddegpoly() // To solve qubic equation(a*x^3 +b*x^2 +cx +d = 0)
         }
     }
 }
-void inputpoly(int k, float *coeff)
-/*-It receives the coefficients from the user and stores it in an array
-  -Its parameters are the degree of the polynomial and the coefficients array*/
-{
 
+void inputpoly(int k, float *coeff) // To input polynomial coefficients
+{
     char *coeffo = NULL;
     coeffo = malloc(30);
 
@@ -178,21 +122,17 @@ void inputpoly(int k, float *coeff)
         {
             i--;
             printf("Please enter a number: ");
-
             continue;
         }
     }
     free(coeffo);
 }
 
-void printpolsym(float coeff[], int k)
-/* -To print the polynomial equation in a symbolic way
--Its parameters are the degree of the polynomial and the coefficients array*/
+void printpolsym(float coeff[], int k) // To print polynomial in symbolic form
 {
     printf("The roots of the equation: ");
     for (int i = k; i >= 0; --i)
     {
-
         if (i == 0)
         {
             printf("%+0.2f", coeff[k - i]);
@@ -207,6 +147,7 @@ void printpolsym(float coeff[], int k)
     }
     printf(" = 0 are\n");
 }
+
 double det(int k, double co[k][k]) // To calculate determinants
 {
     double submat[k][k - 1][k - 1], det1 = 0.0;
@@ -234,8 +175,7 @@ double det(int k, double co[k][k]) // To calculate determinants
     return det1;
 }
 
-void solve_lineareqns(int k) // solving system of linear equations using Cramer's method
-
+void solve_lineareqns(int k) // To solve system of linear equations using Cramer's method
 {
     printf("Enter the coefficients of the system of %d linear equations: \n", k);
     double Dn[k][k][k], coeff[k][k + 1], D[k][k], R[k];
@@ -266,9 +206,8 @@ void solve_lineareqns(int k) // solving system of linear equations using Cramer'
         printf("\n");
     }
 }
-void inputsys(int k, double coeff[k][k + 1])
-/*-It receives the coefficients from the user and stores it in an array
-        -Its parameters are the order of the system and the coefficients array*/
+
+void inputsys(int k, double coeff[k][k + 1]) // To input system coefficients
 {
     char *coeffo = NULL;
     coeffo = malloc(30);
@@ -286,7 +225,6 @@ void inputsys(int k, double coeff[k][k + 1])
             {
                 i--;
                 printf("Please enter a number: ");
-
                 continue;
             }
         }
@@ -294,8 +232,7 @@ void inputsys(int k, double coeff[k][k + 1])
     free(coeffo);
 }
 
-void printsys(int k, double coeff[k][k + 1]) /*-To print the system of linear equations in a symbolic way
-                                                               -Its parameters are the order of the system and the coefficients array*/
+void printsys(int k, double coeff[k][k + 1]) // To print system of equations
 {
     printf("\nThe system:\n");
     for (int i = 0; i < k; i++)
