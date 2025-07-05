@@ -1,5 +1,6 @@
 #include "functions.c"
 
+// Function to display the main menu
 void print_menu()
 {
     printf("************************************************************\n");
@@ -26,29 +27,29 @@ int main(void)
 
         char c = 0, t = 0;
         int k;
-        t = getch();
-        printf("%c\n", t); // Echo the pressed key
+        t = getch();       // Get user's menu choice (prevent pressing Enter)
+        printf("%c\n", t); // Printing the pressed key
 
         switch (t)
         {
         case ('1'):
-            slv_1stdegpoly();
+            slv_1stdegpoly(); // Solve linear equation
             break;
         case ('2'):
-            slv_2nddegpoly();
+            slv_2nddegpoly(); // Solve quadratic equation
             break;
         case ('3'):
-            slv_3rddegpoly();
+            slv_3rddegpoly(); // Solve cubic equation
             break;
-        case ('4'):
+        case ('4'): // Ask the user how many equations to solve
             printf("Please enter the number of equations you want to solve: ");
             scanf("%d", &k);
-            solve_lineareqns(k);
+            solve_lineareqns(k); // Solve system of linear equations
             break;
-        case ('5'):
+        case ('5'): // Exit the program
             printf("Exiting...\n");
             return 0;
-        default:
+        default: // Handle invalid input
             printf("Invalid choice! Please try again.\n");
             break;
         }
