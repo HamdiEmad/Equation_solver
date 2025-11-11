@@ -95,7 +95,7 @@ X1 = 1.000	X2 = 2.000
 
 - [Hamdi Emad](https://github.com/HamdiEmad)
 - [Hamed Islam](https://github.com/hamedislam)
-- [Hazem Sherif](https://github.com/HazemHHHH)
+- [Hazem Sherif](https://github.com/ZoOmA239)
 
 ## License
 
